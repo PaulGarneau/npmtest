@@ -1,0 +1,66 @@
+resources:
+  containers:
+    - container: builder
+      image: levelsbeyond-docker.jfrog.io/builder
+      endpoint: LB_Docker_Images
+      env:
+        JAVA8_HOME: /usr/lib/jvm/java-1.8.0
+        JAVA11_HOME: /usr/lib/jvm/java-11
+        JAVA_OPTS: "-Xmx5g -Xms5g"
+
+variables:
+  workingDir: $(Build.Repository.LocalPath)
+  gitRepoName: $(Build.Repository.Name)
+  jobString: 'npmtest'
+  builderGradleProps: -i --stacktrace --build-cache --no-daemon -Dorg.gradle.java.home=$JAVA11_HOME
+  gradleProps: -i --stacktrace --build-cache --no-daemon
+  GRADLE_USER_HOME: $(Pipeline.Workspace)/.gradle
+  #system.debug: true
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+trigger:
+  branches:
+    include:
+    - '*'
+
+stages:
+  - stage: Publish
+    jobs:
+      - job: GetVersionText
+        container: builder
+        steps:
+          - task: DownloadSecureFile@1
+            name: DownloadNpmrcFile
+            inputs:
+              secureFile: '.npmrc'
+          - task: Bash@3
+            name: GeneralBash
+            displayName: 'Configure npm'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # output npm info
+                echo "============= start of debug info ============="
+                echo "Agent.TempDirectory ==> $(Agent.TempDirectory)"
+                echo "pwd ==> $(pwd)"
+                ls -lah $(Agent.TempDirectory)
+                echo "get npm and node info"
+                npm --version
+                node -v
+                npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath)
+                echo "output of 'npm ls nx' command:"
+                npm ls nx
+                echo "============== end of debug info =============="
+          - task: npmAuthenticate@0
+            inputs:
+              workingFile: $(DownloadNpmrcFile.secureFilePath)
+          - task: Bash@3
+            name: NpmWhoAmI
+            displayName: 'npm_whoami'
+            inputs:
+              targetType: 'inline'
+              script: |
+                npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath)
+
