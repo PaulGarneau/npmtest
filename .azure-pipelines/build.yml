@@ -49,7 +49,9 @@ stages:
                 echo "get npm and node info"
                 npm --version
                 node -v
+                echo "npm config file: $(DownloadNpmrcFile.secureFilePath)"
                 npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath)
+                echo "whoami return: $?"
                 echo "output of 'npm ls nx' command:"
                 npm ls nx
                 echo "============== end of debug info =============="
@@ -62,5 +64,8 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
+                echo "============= start of debug info ============="
+                echo "npm config file: $(DownloadNpmrcFile.secureFilePath)"
                 npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath)
-
+                echo "whoami return: $?"
+                echo "============== end of debug info =============="
