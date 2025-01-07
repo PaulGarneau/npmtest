@@ -28,7 +28,7 @@ trigger:
 stages:
   - stage: Publish
     jobs:
-      - job: GetVersionText
+      - job: NpmSteps
         container: builder
         steps:
           - task: DownloadSecureFile@1
