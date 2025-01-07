@@ -64,6 +64,7 @@ stages:
           - task: npmAuthenticate@0
             inputs:
               workingFile: $(DownloadNpmrcFile.secureFilePath)
+              customEndpoint: "Artifactory NPM"
           - task: Bash@3
             name: NpmWhoAmI
             displayName: 'npm_whoami'
