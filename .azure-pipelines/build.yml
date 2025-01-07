@@ -1,7 +1,7 @@
 resources:
   containers:
-    - container: builder
-      image: levelsbeyond-docker.jfrog.io/builder
+    - container: rocky8-builder
+      image: levelsbeyond-docker.jfrog.io/rocky8-java-8-and-11-builder:3.0.0
       endpoint: LB_Docker_Images
       env:
         JAVA8_HOME: /usr/lib/jvm/java-1.8.0
@@ -29,7 +29,7 @@ stages:
   - stage: Publish
     jobs:
       - job: NpmSteps
-        container: builder
+        container: rocky8-builder
         steps:
           - task: DownloadSecureFile@1
             name: DownloadNpmrcFile
