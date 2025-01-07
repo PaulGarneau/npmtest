@@ -73,6 +73,9 @@ stages:
               script: |
                 echo "============= start of debug info ============="
                 echo "npm config file: $(DownloadNpmrcFile.secureFilePath)"
+                echo "============= start of npm config file contents ============="
+                cat $(DownloadNpmrcFile.secureFilePath)
+                echo "============== end of npm config file contents =============="
                 npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath) > ./ptg.log
                 echo "whoami return: $?"
                 echo "============= start of whoami cmd output ============="
