@@ -50,8 +50,14 @@ stages:
                 npm --version
                 node -v
                 echo "npm config file: $(DownloadNpmrcFile.secureFilePath)"
-                npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath)
+                echo "============= start of npm config file contents ============="
+                cat $(DownloadNpmrcFile.secureFilePath)
+                echo "============== end of npm config file contents =============="
+                npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath) > ./ptg.log
                 echo "whoami return: $?"
+                echo "============= start of whoami cmd output ============="
+                cat ./ptg.log
+                echo "============== end of whoami cmd output =============="
                 echo "output of 'npm ls nx' command:"
                 npm ls nx
                 echo "============== end of debug info =============="
@@ -66,6 +72,9 @@ stages:
               script: |
                 echo "============= start of debug info ============="
                 echo "npm config file: $(DownloadNpmrcFile.secureFilePath)"
-                npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath)
+                npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath) > ./ptg.log
                 echo "whoami return: $?"
+                echo "============= start of whoami cmd output ============="
+                cat ./ptg.log
+                echo "============== end of whoami cmd output =============="
                 echo "============== end of debug info =============="
