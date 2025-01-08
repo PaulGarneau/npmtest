@@ -51,7 +51,7 @@ stages:
                 cat $(DownloadNpmrcFile.secureFilePath)
                 echo "============== end of npm config file contents =============="
                 whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
-                echo "whoami return: $?"
+                echo "whoami specifying npm userconfig file return: $?"
                 echo "============= start of whoami cmd output ============="
                 firstPartWhoami=${whoamistr::-2}
                 secondPartWhoami=${whoamistr: -2}
@@ -62,11 +62,23 @@ stages:
                 echo "============== end of whoami cmd output =============="
                 echo "output of 'npm ls nx' command:"
                 npm ls nx
+                echo "copy secureFilePath to working directory"
+                cp $(DownloadNpmrcFile.secureFilePath) ./.npmrc
+                whoamistr=$(npm whoami)
+                echo "whoami without specifying npm userconfig file return: $?"
+                echo "============= start of whoami cmd output ============="
+                firstPartWhoami=${whoamistr::-2}
+                secondPartWhoami=${whoamistr: -2}
+                echo "whoamistr: ${whoamistr}"
+                echo "firstPartWhoami: ${firstPartWhoami}"
+                echo "secondPartWhoami: ${secondPartWhoami}"
+                echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
+                echo "============== end of whoami cmd output =============="
                 echo "============== end of debug info =============="
           - task: npmAuthenticate@0
             condition: ${{variables.performNpmAuthenticate}}
             inputs:
-              workingFile: $(DownloadNpmrcFile.secureFilePath)
+              workingFile: $(System.DefaultWorkingDirectory)/.npmrc
               customEndpoint: "Artifactory NPM"
           - task: Bash@3
             name: NpmWhoAmI
@@ -75,12 +87,22 @@ stages:
               targetType: 'inline'
               script: |
                 echo "============= start of debug info ============="
-                echo "npm config file: $(DownloadNpmrcFile.secureFilePath)"
+                echo "npm config file: $(System.DefaultWorkingDirectory)/.npmrc"
                 echo "============= start of npm config file contents ============="
-                cat $(DownloadNpmrcFile.secureFilePath)
+                cat $(System.DefaultWorkingDirectory)/.npmrc
                 echo "============== end of npm config file contents =============="
-                whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
-                echo "whoami return: $?"
+                whoamistr=$(npm whoami --userconfig $(System.DefaultWorkingDirectory)/.npmrc)
+                echo "whoami specifying npm userconfig file return: $?"
+                echo "============= start of whoami cmd output ============="
+                firstPartWhoami=${whoamistr::-2}
+                secondPartWhoami=${whoamistr: -2}
+                echo "whoamistr: ${whoamistr}"
+                echo "firstPartWhoami: ${firstPartWhoami}"
+                echo "secondPartWhoami: ${secondPartWhoami}"
+                echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
+                echo "============== end of whoami cmd output =============="
+                whoamistr=$(npm whoami)
+                echo "whoami without specifying npm userconfig file return: $?"
                 echo "============= start of whoami cmd output ============="
                 firstPartWhoami=${whoamistr::-2}
                 secondPartWhoami=${whoamistr: -2}
