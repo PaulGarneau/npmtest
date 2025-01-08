@@ -1,37 +1,23 @@
 {
-  "name": "@ptg/angular-reach-engine-sdk",
-  "version": "4.0.2-ptg",
-  "description": "Reach Engine Angular SDK",
-  "author": "Levels Beyond",
-  "main": "dist/ares.js",
-  "typings": "dist/generated/index.d.ts",
+  "name": "@ptg/npmtest",
+  "version": "4.0.2-202501081540.28-ptg",
+  "description": "simple npm pakg",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": [
-    "/dist",
-    "/tsconfig.json"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulGarneau/npmtest.git"
+  },
+  "keywords": [
+    "NPM",
+    "Tutorial"
   ],
-  "devDependencies": {
-    "@angular/common": "15.2.6",
-    "@angular/core": "15.2.6",
-    "@angular/platform-browser": "15.2.6",
-    "ts-loader": "9.3.1",
-    "typescript": "4.9.5",
-    "webpack": "5.73.0",
-    "webpack-angular-externals": "^1.0.2",
-    "webpack-cli": "4.10.0"
+  "author": "Paul Garneau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulGarneau/npmtest/issues"
   },
-  "dependencies": {
-    "rxjs": "6.6.7",
-    "rxjs-compat": "6.6.7"
-  },
-  "peerDependencies": {
-    "@angular/common": "15.2.6",
-    "@angular/core": "15.2.6",
-    "@angular/platform-browser": "15.2.6"
-  },
-  "publishConfig": {
-    "registry": "https://levelsbeyond.jfrog.io/levelsbeyond/api/npm/npm-repo"
-  }
+  "homepage": "https://github.com/PaulGarneau/npmtest#readme"
 }
