@@ -1,6 +1,6 @@
 {
   "name": "@ptg/angular-reach-engine-sdk",
-  "version": "4.0.2-SNAPSHOT",
+  "version": "4.0.2-ptg",
   "description": "Reach Engine Angular SDK",
   "author": "Levels Beyond",
   "main": "dist/ares.js",
