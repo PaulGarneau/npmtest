@@ -88,6 +88,8 @@ stages:
               targetType: 'inline'
               script: |
                 echo "============= start of debug info ============="
+                echo "output the npm config info"
+                npm config list -l
                 echo "run generate.sh script"
                 ./generate.sh ${{variables.dynamicVersion}}
                 echo "============= end of debug info ============="
