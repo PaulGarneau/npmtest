@@ -9,7 +9,7 @@ resources:
         JAVA_OPTS: "-Xmx5g -Xms5g"
 
 variables:
-  performNpmAuthenticate: false
+  performNpmAuthenticate: true
   # system.debug: true
 
 pool:
