@@ -1,0 +1,37 @@
+{
+  "name": "@ptg/angular-reach-engine-sdk",
+  "version": "4.0.2-SNAPSHOT",
+  "description": "Reach Engine Angular SDK",
+  "author": "Levels Beyond",
+  "main": "dist/ares.js",
+  "typings": "dist/generated/index.d.ts",
+  "scripts": {
+    "build": "webpack"
+  },
+  "files": [
+    "/dist",
+    "/tsconfig.json"
+  ],
+  "devDependencies": {
+    "@angular/common": "15.2.6",
+    "@angular/core": "15.2.6",
+    "@angular/platform-browser": "15.2.6",
+    "ts-loader": "9.3.1",
+    "typescript": "4.9.5",
+    "webpack": "5.73.0",
+    "webpack-angular-externals": "^1.0.2",
+    "webpack-cli": "4.10.0"
+  },
+  "dependencies": {
+    "rxjs": "6.6.7",
+    "rxjs-compat": "6.6.7"
+  },
+  "peerDependencies": {
+    "@angular/common": "15.2.6",
+    "@angular/core": "15.2.6",
+    "@angular/platform-browser": "15.2.6"
+  },
+  "publishConfig": {
+    "registry": "https://levelsbeyond.jfrog.io/levelsbeyond/api/npm/npm-repo"
+  }
+}
