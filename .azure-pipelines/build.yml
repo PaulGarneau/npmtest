@@ -53,7 +53,7 @@ stages:
                 echo "============= start of npm config file contents ============="
                 cat $(DownloadNpmrcFile.secureFilePath)
                 echo "============== end of npm config file contents =============="
-                whoamistr = $(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
+                whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
                 echo "whoami return: $?"
                 echo "============= start of whoami cmd output ============="
                 firstPartWhoami=${whoamistr::-2}
@@ -81,7 +81,7 @@ stages:
                 echo "============= start of npm config file contents ============="
                 cat $(DownloadNpmrcFile.secureFilePath)
                 echo "============== end of npm config file contents =============="
-                whoamistr = $(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
+                whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
                 echo "whoami return: $?"
                 echo "============= start of whoami cmd output ============="
                 firstPartWhoami=${whoamistr::-2}
