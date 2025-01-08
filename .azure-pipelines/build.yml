@@ -66,10 +66,10 @@ stages:
                 echo "output of 'npm ls nx' command:"
                 npm ls nx
                 echo "============== end of debug info =============="
-          # - task: npmAuthenticate@0
-          #   inputs:
-          #     workingFile: $(DownloadNpmrcFile.secureFilePath)
-          #     customEndpoint: "Artifactory NPM"
+          - task: npmAuthenticate@0
+            inputs:
+              workingFile: $(DownloadNpmrcFile.secureFilePath)
+              customEndpoint: "Artifactory NPM"
           - task: Bash@3
             name: NpmWhoAmI
             displayName: 'npm_whoami'
