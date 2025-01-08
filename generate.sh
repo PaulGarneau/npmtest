@@ -83,8 +83,19 @@ function buildTsSdk()
 
 #CUSTOM_CFG_PATH="/tmp/.npmptg"
 #CUSTOM_CFG_PATH="~/.npmrc"
-# for npm publish, cannot (currently) publish a package with the same version (i.e., cannot overwrite an existing npm package version)
-# therefore, append a generated date/time string to the version number to make it a unique version every time the script is run
-VERSION="4.0.2-"$(date "+%Y%m%d%H%M.%S")"-ptg"
+# for npm publish, cannot (currently) publish a package with the same version (i.e., cannot overwrite an existing npm package version).
+# therefore, append a generated date/time string to the version number to make it a unique version every time the script is run.
+# allow pipeline to send flag to determine if version will have a generated unique string attached to version.
+# this allows pass/fail to be tested by the same pipeline to exhibit what works/does not work.
+echo "number of cmdline params: $#"
+echo "first parameter: ${1-notprovided}"
+if [ "${1}" == "true" ]; then
+    echo "true"
+    VERSION="4.0.2-"$(date "+%Y%m%d%H%M.%S")"-ptg"
+else
+    echo "false"
+    VERSION="4.0.2-ptg"
+fi
+
 buildTsSdk
 exit 0

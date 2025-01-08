@@ -10,6 +10,7 @@ resources:
 
 variables:
   performNpmAuthenticate: false
+  dynamicVersion: false
   # system.debug: true
 
 pool:
@@ -88,7 +89,7 @@ stages:
               script: |
                 echo "============= start of debug info ============="
                 echo "run generate.sh script"
-                ./generate.sh
+                ./generate.sh ${{variables.dynamicVersion}}
                 echo "============= end of debug info ============="
           - task: Bash@3
             name: NpmWhoAmI
