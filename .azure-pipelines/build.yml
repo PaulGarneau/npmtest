@@ -9,13 +9,8 @@ resources:
         JAVA_OPTS: "-Xmx5g -Xms5g"
 
 variables:
-  workingDir: $(Build.Repository.LocalPath)
-  gitRepoName: $(Build.Repository.Name)
-  jobString: 'npmtest'
-  builderGradleProps: -i --stacktrace --build-cache --no-daemon -Dorg.gradle.java.home=$JAVA11_HOME
-  gradleProps: -i --stacktrace --build-cache --no-daemon
-  GRADLE_USER_HOME: $(Pipeline.Workspace)/.gradle
-  #system.debug: true
+  performNpmAuthenticate: false
+  # system.debug: true
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -67,6 +62,7 @@ stages:
                 npm ls nx
                 echo "============== end of debug info =============="
           - task: npmAuthenticate@0
+            condition: ${{variables.performNpmAuthenticate}}
             inputs:
               workingFile: $(DownloadNpmrcFile.secureFilePath)
               customEndpoint: "Artifactory NPM"
