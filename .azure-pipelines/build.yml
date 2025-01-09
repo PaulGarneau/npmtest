@@ -88,6 +88,8 @@ stages:
               targetType: 'inline'
               script: |
                 echo "============= start of debug info ============="
+                echo "System.DefaultWorkingDirectory ==> $(System.DefaultWorkingDirectory)"
+                ls -lah ${SYSTEM_DEFAULTWORKINGDIRECTORY}
                 echo "output the npm config info"
                 npm config list -l
                 echo "run generate.sh script"
@@ -100,6 +102,8 @@ stages:
               targetType: 'inline'
               script: |
                 echo "============= start of debug info ============="
+                echo "System.DefaultWorkingDirectory ==> $(System.DefaultWorkingDirectory)"
+                ls -lah ${SYSTEM_DEFAULTWORKINGDIRECTORY}
                 echo "npm config file: $(System.DefaultWorkingDirectory)/.npmrc"
                 echo "============= start of npm config file contents ============="
                 cat $(System.DefaultWorkingDirectory)/.npmrc
