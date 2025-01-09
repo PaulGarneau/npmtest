@@ -81,6 +81,22 @@ function buildTsSdk()
     buildNpmPackage
 }
 
+function outputNpmConfigInfo()
+{
+    echo "show all npm config info"
+    npm config list -l
+    echo "show individual npm config info"
+    echo "  globalconfig value: "$(npm config get globalconfig)
+    echo "  userconfig value: "$(npm config get userconfig)
+    echo "  registry value: "$(npm config get registry)
+    echo "  node-version value: "$(npm config get node-version)
+    echo "  package-lock value: "$(npm config get package-lock)
+    echo "  dry-run value: "$(npm config get dry-run)
+    echo "  auth-type value: "$(npm config get auth-type)
+    echo "  always-auth value: "$(npm config get always-auth)
+    echo "  allow-same-version value: "$(npm config get allow-same-version)
+}
+
 # for npm publish, cannot (currently) publish a package with the same version (i.e., cannot overwrite an existing npm package version).
 # therefore, append a generated date/time string to the version number to make it a unique version every time the script is run.
 # allow pipeline to send flag to determine if version will have a generated unique string attached to version.
@@ -120,5 +136,6 @@ if [ "TEST${2}" != "TEST" ]; then
     ls -la .
 fi
 
+outputNpmConfigInfo
 buildTsSdk
 exit 0
