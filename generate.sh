@@ -108,7 +108,7 @@ if [ "TEST${2}" != "TEST" ]; then
         # npm ERR! need auth You need to authorize this machine using `npm adduser`
     # the solution is NOT to attempt the command "npm adduser"...
     # but instead to copy the .npmrc file to the npm project directory!!!
-    cp "${2}" .
+    # cp "${2}" .
     ls -la .
 fi
 
