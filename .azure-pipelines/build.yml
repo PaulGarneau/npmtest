@@ -10,7 +10,7 @@ resources:
 
 variables:
   performNpmAuthenticate: false
-  dynamicVersion: true
+  dynamicVersion: false
   # system.debug: true
 
 pool:

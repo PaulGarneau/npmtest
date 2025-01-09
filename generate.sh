@@ -81,6 +81,12 @@ function buildTsSdk()
     buildNpmPackage
 }
 
+function setNpmConfigInfo()
+{
+    echo "set individual npm config info"
+    echo "  allow-same-version value: "$(npm config set allow-same-version=true)
+}
+
 function outputNpmConfigInfo()
 {
     echo "show all npm config info"
@@ -136,6 +142,7 @@ if [ "TEST${2}" != "TEST" ]; then
     ls -la .
 fi
 
+setNpmConfigInfo
 outputNpmConfigInfo
 buildTsSdk
 exit 0
