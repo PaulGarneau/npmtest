@@ -84,7 +84,11 @@ function buildTsSdk()
 function setNpmConfigInfo()
 {
     echo "set individual npm config info"
-    echo "  allow-same-version value: "$(npm config set allow-same-version=true)
+    echo "  allow-same-version value: "
+    # attempted to allow the same name and version package to be published with the following config setting:
+    npm config set allow-same-version=true
+    # However, according to official npm docs page: https://docs.npmjs.com/cli/v11/commands/npm-publish
+        # The publish will fail if the package name and version combination already exists in the specified registry.
 }
 
 function outputNpmConfigInfo()
