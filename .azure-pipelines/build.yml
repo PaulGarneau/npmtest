@@ -61,20 +61,6 @@ stages:
                 echo "secondPartWhoami: ${secondPartWhoami}"
                 echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
                 echo "============== end of whoami cmd output =============="
-                echo "output of 'npm ls nx' command:"
-                npm ls nx
-                echo "copy secureFilePath to working directory"
-                cp $(DownloadNpmrcFile.secureFilePath) ./.npmrc
-                whoamistr=$(npm whoami)
-                echo "whoami without specifying npm userconfig file return: $?"
-                echo "============= start of whoami cmd output ============="
-                firstPartWhoami=${whoamistr::-2}
-                secondPartWhoami=${whoamistr: -2}
-                echo "whoamistr: ${whoamistr}"
-                echo "firstPartWhoami: ${firstPartWhoami}"
-                echo "secondPartWhoami: ${secondPartWhoami}"
-                echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
-                echo "============== end of whoami cmd output =============="
                 echo "============== end of debug info =============="
           - task: npmAuthenticate@0
             condition: ${{variables.performNpmAuthenticate}}
@@ -93,7 +79,7 @@ stages:
                 echo "output the npm config info"
                 npm config list -l
                 echo "run generate.sh script"
-                ./generate.sh ${{variables.dynamicVersion}}
+                ./generate.sh ${{variables.dynamicVersion}} $(DownloadNpmrcFile.secureFilePath)
                 echo "============= end of debug info ============="
           - task: Bash@3
             name: NpmWhoAmI

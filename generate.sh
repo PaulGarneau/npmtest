@@ -81,9 +81,6 @@ function buildTsSdk()
     buildNpmPackage
 }
 
-#CUSTOM_CFG_PATH="/tmp/.npmptg"
-#CUSTOM_CFG_PATH="~/.npmrc"
-CUSTOM_CFG_PATH=".npmrc"
 # for npm publish, cannot (currently) publish a package with the same version (i.e., cannot overwrite an existing npm package version).
 # therefore, append a generated date/time string to the version number to make it a unique version every time the script is run.
 # allow pipeline to send flag to determine if version will have a generated unique string attached to version.
@@ -96,6 +93,15 @@ if [ "${1}" == "true" ]; then
 else
     echo "false"
     VERSION="4.0.2-ptg"
+fi
+
+CUSTOM_CFG_PATH=
+if [ "TEST${2}" != "TEST" ]; then
+    echo "custom cfg path provided"
+    # copy config to npm project dir
+    pwd
+    cp "${2}" .
+    ls -la .
 fi
 
 buildTsSdk
