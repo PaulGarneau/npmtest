@@ -100,7 +100,8 @@ if [ "TEST${2}" != "TEST" ]; then
     echo "custom cfg path provided"
     # copy config to npm project dir
     pwd
-    cp "${2}" .
+    # skip copying the npmrc file to see if publishing fails
+    # cp "${2}" .
     ls -la .
 fi
 
