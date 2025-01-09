@@ -101,14 +101,22 @@ if [ "TEST${2}" != "TEST" ]; then
     # copy config to npm project dir
     pwd
     # if the following copy of the npmrc file is skipped...
-    # npm whoami returns the following:
-        # npm whoami
-        # npm ERR! code ENEEDAUTH
-        # npm ERR! need auth This command requires you to be logged in.
-        # npm ERR! need auth You need to authorize this machine using `npm adduser`
-    # the solution is NOT to attempt the command "npm adduser"...
-    # but instead to copy the .npmrc file to the npm project directory!!!
-    # cp "${2}" .
+        # npm whoami returns the following:
+            # npm ERR! code ENEEDAUTH
+            # npm ERR! need auth This command requires you to be logged in.
+            # npm ERR! need auth You need to authorize this machine using `npm adduser`
+        # the solution is NOT to attempt the command "npm adduser"...
+        # but instead to copy the .npmrc file to the npm project directory!!!
+        # npm publish returns the following:
+            # npm ERR! code E404
+            # npm ERR! 404 Not Found - PUT https://registry.npmjs.org/@ptg%2fnpmtest - Not found
+            # npm ERR! 404 
+            # npm ERR! 404  '@ptg/npmtest@4.0.2-202501091046.52-ptg' is not in the npm registry.
+        # interpreting the return reveals that the levelsbeyond registry is not defined (since the npmrc is not in place)...
+        # and the publish attempted to publish the package to the public npm registry, which failed (thankfully)
+    # when the .npmrc file is in the npm project directory, everything works as desired.
+    # therefore, copy the .npmrc file to the npm project directory
+    cp "${2}" .
     ls -la .
 fi
 
