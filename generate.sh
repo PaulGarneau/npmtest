@@ -46,8 +46,8 @@ function setupNpmPackage()
 
     echo "npm whoami"
     # npm whoami ${npmCfgPath}
-    npm whoami
-    checkErr $? "Failed to whoami"
+    # npm whoami
+    # checkErr $? "Failed to whoami"
 
     echo "npm install: ${npmCfgPath}"
     npm install --legacy-peer-deps ${npmCfgPath}
@@ -100,8 +100,15 @@ if [ "TEST${2}" != "TEST" ]; then
     echo "custom cfg path provided"
     # copy config to npm project dir
     pwd
-    # skip copying the npmrc file to see if publishing fails
-    # cp "${2}" .
+    # if the following copy of the npmrc file is skipped...
+    # npm whoami returns the following:
+        # npm whoami
+        # npm ERR! code ENEEDAUTH
+        # npm ERR! need auth This command requires you to be logged in.
+        # npm ERR! need auth You need to authorize this machine using `npm adduser`
+    # the solution is NOT to attempt the command "npm adduser"...
+    # but instead to copy the .npmrc file to the npm project directory!!!
+    cp "${2}" .
     ls -la .
 fi
 
