@@ -40,6 +40,7 @@ stages:
                 # output npm info
                 echo "============= start of debug info ============="
                 echo "pwd ==> $(pwd)"
+                echo "NPM_TOKEN ==> ${NPM_TOKEN}"
                 echo "Agent.TempDirectory ==> $(Agent.TempDirectory)"
                 ls -lah $(Agent.TempDirectory)
                 echo "System.DefaultWorkingDirectory ==> $(System.DefaultWorkingDirectory)"
@@ -65,7 +66,7 @@ stages:
           - task: npmAuthenticate@0
             condition: ${{variables.performNpmAuthenticate}}
             inputs:
-              workingFile: $(System.DefaultWorkingDirectory)/.npmrc
+              workingFile: DownloadNpmrcFile.secureFilePath)
               customEndpoint: "Artifactory NPM"
           - task: Bash@3
             name: NpmPublish
