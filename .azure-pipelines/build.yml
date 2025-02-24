@@ -31,6 +31,10 @@ stages:
             name: DownloadNpmrcFile
             inputs:
               secureFile: '.npmrc'
+          - task: DownloadSecureFile@1
+            name: DownloadSettingsFile
+            inputs:
+              secureFile: 'settings.xml'
           - task: Bash@3
             name: GeneralBash
             displayName: 'Configure npm'
@@ -52,6 +56,9 @@ stages:
                 echo "============= start of npm config file contents ============="
                 cat $(DownloadNpmrcFile.secureFilePath)
                 echo "============== end of npm config file contents =============="
+                echo "============= start of settings file contents ============="
+                cat $(DownloadSettingsFile.secureFilePath)
+                echo "============== end of settings file contents =============="
                 whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
                 echo "whoami specifying npm userconfig file return: $?"
                 echo "============= start of whoami cmd output ============="
