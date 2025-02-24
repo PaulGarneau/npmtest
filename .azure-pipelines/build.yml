@@ -59,6 +59,9 @@ stages:
                 echo "============= start of settings file contents ============="
                 cat $(DownloadSettingsFile.secureFilePath)
                 echo "============== end of settings file contents =============="
+                echo "============= start grep for username in settings file contents ============="
+                grep username $(DownloadSettingsFile.secureFilePath)
+                echo "============== end of grep for username in settings file contents =============="
                 whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
                 echo "whoami specifying npm userconfig file return: $?"
                 echo "============= start of whoami cmd output ============="
