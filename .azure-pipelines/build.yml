@@ -57,10 +57,12 @@ stages:
                 cat $(DownloadNpmrcFile.secureFilePath)
                 echo "============== end of npm config file contents =============="
                 echo "============= start of settings file contents ============="
-                cat $(DownloadSettingsFile.secureFilePath)
+                cp $(DownloadSettingsFile.secureFilePath) ${SYSTEM_DEFAULTWORKINGDIRECTORY}/tmp.tmp
+                cat ${SYSTEM_DEFAULTWORKINGDIRECTORY}/tmp.tmp
                 echo "============== end of settings file contents =============="
                 echo "============= start grep for username in settings file contents ============="
-                grep username $(DownloadSettingsFile.secureFilePath) | awk -F ">" '{print $2}' | awk -F "<" '{print $1}'
+                grep username ${SYSTEM_DEFAULTWORKINGDIRECTORY}/tmp.tmp | awk -F ">" '{print $2}' | awk -F "<" '{print $1}'
+                rm -f ${SYSTEM_DEFAULTWORKINGDIRECTORY}/tmp.tmp
                 echo "============== end of grep for username in settings file contents =============="
                 whoamistr=$(npm whoami --userconfig $(DownloadNpmrcFile.secureFilePath))
                 echo "whoami specifying npm userconfig file return: $?"
