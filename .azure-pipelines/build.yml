@@ -120,7 +120,7 @@ stages:
                 </settings>
                 END
                 echo "======== begin listing of working dir ========"
-                ls -lah ${SYSTEM_DEFAULTWORKINGDIRECTORY}'
+                ls -lah '${SYSTEM_DEFAULTWORKINGDIRECTORY}'
                 echo "========= end listing of working dir ========="
                 echo "======== begin output of mvn settings file ========"
                 cat mvnsettings.xml
