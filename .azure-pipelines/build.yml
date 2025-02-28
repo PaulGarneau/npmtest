@@ -74,6 +74,57 @@ stages:
                 echo "secondPartWhoami: ${secondPartWhoami}"
                 echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
                 echo "============== end of whoami cmd output =============="
+                cat > 'mvnsettings.xml' << 'END'
+                <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                                    http://maven.apache.org/xsd/settings-1.0.0.xsd">
+                    <localRepository/>
+                    <interactiveMode/>
+                    <usePluginRegistry/>
+                    <offline/>
+                    <servers>
+                        <server>
+                            <id>LB-repository</id>
+                            <username>${ARTIFACTORY_USER}</username>
+                            <password>${ARTIFACTORY_PASSWORD}</password>
+                        </server>
+                        <server>
+                            <id>LB-Snapshots</id>
+                            <username>${ARTIFACTORY_USER}</username>
+                            <password>${ARTIFACTORY_PASSWORD}</password>
+                        </server>
+                        <server>
+                            <id>LB-Releases</id>
+                            <username>${ARTIFACTORY_USER}</username>
+                            <password>${ARTIFACTORY_PASSWORD}</password>
+                        </server>
+                        <server>
+                            <id>levelsbeyond-docker.jfrog.io</id>
+                            <username>${ARTIFACTORY_USER}</username>
+                            <password>${ARTIFACTORY_PASSWORD}</password>
+                        </server>
+                    </servers>
+                    <mirrors>
+                        <mirror>
+                            <id>LB-repository</id>
+                            <name>LB repository</name>
+                            <url>https://levelsbeyond.jfrog.io/levelsbeyond/repo</url>
+                            <mirrorOf>LB-repository,LB-Snapshots,LB-Releases</mirrorOf>
+                        </mirror>
+                    </mirrors>
+                    <proxies/>
+                    <pluginGroups/>
+                    <profiles/>
+                    <activeProfiles/>
+                </settings>
+                END
+                echo "======== begin listing of working dir ========"
+                ls -la '${{variables.workingDir}}'
+                echo "========= end listing of working dir ========="
+                echo "======== begin output of mvn settings file ========"
+                cat mvnsettings.xml
+                echo "========= end output of mvn settings file ========="
                 echo "============== end of debug info =============="
           - task: npmAuthenticate@0
             condition: ${{variables.performNpmAuthenticate}}
