@@ -119,12 +119,18 @@ stages:
                     <activeProfiles/>
                 </settings>
                 END
+                echo "======== start output env vars ========"
+                env | sort
+                echo "========= end output env vars ========="
                 echo "======== begin listing of working dir ========"
-                ls -lah '${SYSTEM_DEFAULTWORKINGDIRECTORY}'
+                ls -lah ${SYSTEM_DEFAULTWORKINGDIRECTORY}
                 echo "========= end listing of working dir ========="
                 echo "======== begin output of mvn settings file ========"
                 cat mvnsettings.xml
                 echo "========= end output of mvn settings file ========="
+                echo "============= start grep for username in settings file contents ============="
+                grep username mvnsettings.xml | awk -F ">" '{print $2}' | awk -F "<" '{print $1}'
+                echo "============== end of grep for username in settings file contents =============="
                 echo "============== end of debug info =============="
           - task: npmAuthenticate@0
             condition: ${{variables.performNpmAuthenticate}}
