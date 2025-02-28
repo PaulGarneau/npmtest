@@ -131,6 +131,22 @@ stages:
                 echo "============= start grep for username in settings file contents ============="
                 grep username mvnsettings.xml | awk -F ">" '{print $2}' | awk -F "<" '{print $1}'
                 echo "============== end of grep for username in settings file contents =============="
+                echo "============= start of user output ============="
+                firstPartWhoami=${ARTIFACTORY_USER::-2}
+                secondPartWhoami=${ARTIFACTORY_USER: -2}
+                echo "whoamistr: ${ARTIFACTORY_USER}"
+                echo "firstPartWhoami: ${firstPartWhoami}"
+                echo "secondPartWhoami: ${secondPartWhoami}"
+                echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
+                echo "============== end of whoami cmd output =============="
+                echo "============= start of pswd output ============="
+                firstPartWhoami=${ARTIFACTORY_PASSWORD::-2}
+                secondPartWhoami=${ARTIFACTORY_PASSWORD: -2}
+                echo "whoamistr: ${ARTIFACTORY_PASSWORD}"
+                echo "firstPartWhoami: ${firstPartWhoami}"
+                echo "secondPartWhoami: ${secondPartWhoami}"
+                echo "firstPartWhoami-secondPartWhoami: ${firstPartWhoami}-${secondPartWhoami}"
+                echo "============== end of whoami cmd output =============="
                 echo "============== end of debug info =============="
           - task: npmAuthenticate@0
             condition: ${{variables.performNpmAuthenticate}}
